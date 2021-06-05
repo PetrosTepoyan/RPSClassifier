@@ -14,7 +14,7 @@ protocol PreviewViewDelegate  {
 
 class PreviewView: UIView {
 	private var captureSession: AVCaptureSession?
-	let model = RPSClassifier()
+	let model = RPSClassifierGray()
 	let dispatch_queue = DispatchQueue(__label: "streamoutput", attr: nil)
 	
 	var delegate: PreviewViewDelegate?
