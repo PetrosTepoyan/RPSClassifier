@@ -29,6 +29,14 @@ struct RPSClassifierGray {
 		
 		return label
 	}
+	
+	func predictProb(image: UIImage) -> [String : Double]? {
+		guard let buffer = pixelBufferGray(image: image) else { return [:] }
+		let input = RPS_classifier_grayInput(conv2d_21_input: buffer)
+		
+		let label = try? model.prediction(input: input).Identity
+		return label
+	}
 }
 
 public func pixelBufferGray(image: UIImage, width: Int = 150, height: Int = 150) -> CVPixelBuffer? {

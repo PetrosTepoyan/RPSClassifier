@@ -28,6 +28,7 @@ struct RPSClassifier {
 		
 		return label
 	}
+
 }
 
 func pixelBufferFromImage(image: UIImage) -> CVPixelBuffer {

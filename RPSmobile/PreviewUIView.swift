@@ -10,6 +10,7 @@ import AVFoundation
 
 protocol PreviewViewDelegate  {
 	func didPredictLabel(_ label: String)
+	func didPredictProbs(_ label: [String: Double])
 }
 
 class PreviewView: UIView {
@@ -102,6 +103,9 @@ extension PreviewView : AVCaptureVideoDataOutputSampleBufferDelegate {
 		guard let label = model.predict(image: image) else {
 			return
 		}
+		
+		guard let labels = model.predictProb(image: image) else { return }
 		delegate?.didPredictLabel(label)
+		delegate?.didPredictProbs(labels)
 	}
 }

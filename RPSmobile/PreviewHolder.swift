@@ -18,7 +18,8 @@ struct PreviewHolder: UIViewRepresentable {
 		return previewView
 	}
 	
-	func updateUIView(_ uiView: PreviewView, context: UIViewRepresentableContext<PreviewHolder>) {}
+	func updateUIView(_ uiView: PreviewView, context: UIViewRepresentableContext<PreviewHolder>) {
+	}
 	
 	
 	typealias UIViewType = PreviewView
@@ -32,8 +33,15 @@ extension PreviewHolder: PreviewViewDelegate {
 		}
 		
 	}
+	
+	func didPredictProbs(_ label: [String : Double]) {
+		DispatchQueue.main.async {
+			manager.identity = label
+		}
+	}
 }
 
 class PreviewHolderManager: ObservableObject {
 	@Published var classLabel: String = "Not detected"
+	@Published var identity: [String : Double] = [:]
 }
